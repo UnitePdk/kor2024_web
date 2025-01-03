@@ -1,0 +1,22 @@
+----day54
+CRUD
+기능
+request 어노테이션-HTTP method mapping
+매개변수 전달 방식
+
+POST
+게시물 쓰기
+@POSTMapping
+body, @RequestBody
+
+GET
+게시물 출력
+@GetMapping
+
+PUT
+게시물 수정
+@PutMapping
+
+DELETE
+게시물 삭제
+@DeleteMapping

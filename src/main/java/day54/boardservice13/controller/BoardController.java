@@ -38,4 +38,23 @@ public class BoardController {
         BoardDto result = BoardDao.getInstance().findOne(id);
         return result;
     }
+
+    // 게시물 수정: CRUD-U, PUT, BODY
+    // PUT: http://localhost:8080/update
+    @PutMapping("/update")
+    public boolean update(@RequestBody BoardDto boardDto){
+        System.out.println("BoardController.update");
+        System.out.println("boardDto = " + boardDto);
+        boolean result = BoardDao.getInstance().update(boardDto);
+        return result;
+    }
+
+    // 게시물 삭제: CRUD-D, DELETE
+    @DeleteMapping("/delete")
+    public boolean delete(@RequestParam int index){
+        System.out.println("BoardController.delete");
+        System.out.println("index = " + index);
+        boolean result = BoardDao.getInstance().delete(index);
+        return result;
+    }
 }

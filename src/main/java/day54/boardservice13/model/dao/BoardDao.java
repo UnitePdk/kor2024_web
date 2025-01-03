@@ -61,9 +61,56 @@ public class BoardDao {
             System.out.println(e.getMessage());
         } // try end
         return list;
-    }
+    } // func end
 
     public BoardDto findOne(int id) {
+        try {
+            String sql = "select * from board where board_index =?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                BoardDto boardDto = new BoardDto();
+                boardDto.setIndex(rs.getInt("board_index"));
+                boardDto.setTitle(rs.getString("board_title"));
+                boardDto.setContent(rs.getString("board_content"));
+                boardDto.setWriter(rs.getString("board_writer"));
+                // 패스워드는 제외
+                return boardDto;
+            } // while end
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        } // try end
         return null;
-    }
+    } // func end
+
+    public boolean update(BoardDto boardDto) {
+        try {
+            String sql = "update board set board_title =?, board_content =? where board_index =?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, boardDto.getTitle());
+            ps.setString(2, boardDto.getContent());
+            ps.setInt(3, boardDto.getIndex());
+            int result = ps.executeUpdate();
+            if(result == 1) return true;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        } // try end
+        return false;
+    } // func end
+
+    public boolean delete(int index) {
+        try {
+            String sql = "delete from board where board_index =?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, index);
+            int result = ps.executeUpdate();
+            if(result == 1) return true;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        } // try end
+        return false;
+    } // func end
 }

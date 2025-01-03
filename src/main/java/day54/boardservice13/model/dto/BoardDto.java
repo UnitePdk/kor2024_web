@@ -10,6 +10,11 @@ public class BoardDto {
 
     public BoardDto() {}
 
+    public BoardDto(int index, String title, String content){
+        this.index = index;
+        this.title = title;
+        this.content = content;
+    }
     public BoardDto(int index, String title, String content, String date, String writer, String password) {
         this.index = index;
         this.title = title;
