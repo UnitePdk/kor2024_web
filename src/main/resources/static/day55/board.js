@@ -28,6 +28,13 @@ const writeBoard = () => {
 // 전체 글 출력 함수
 const findAll = () => {
   console.log("findall load");
+  fetch("/findall")
+    .then((response) => {
+      console.log(response);
+      response.json();
+    })
+    .then((data) => console.log(data))
+    .catch((error) => console.log(error));
 };
 
 // 개별 글 출력 함수
