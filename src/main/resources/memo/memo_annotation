@@ -1,0 +1,48 @@
+----day56
+어노테이션
+[Spring 어노테이션]
+1. @SpringBootApplication: 아래 세가지 핵심 어노테이션을 합친 어노테이션
+    1. @EnableAutoConfiguration: Spring web의 필요한 설정을 자동으로 해주고, 톰캣(HTTP web server) 내장
+    2. @ComponentScan: Spring 프로젝트 내 모든 컴포넌트(인스턴스 = Spring bean) 찾아서 메모리(Spring Container) 등록한다
+    3. @Configuration: Spring 프로젝트 내 모든 설정 파일을 읽어들인다.
+    현재 클래스에 어노테이션을 주입
+    Spring web에 필요한 설정을 자동으로 해주고, 현재 클래스의 패키지와 하위 패키지의 모든 컴포넌트를 읽고 등록한다
+    주의: AppStart는 모든 컴포넌트보다 상위 패키지에 존재해야 함
+
+
+[Spring 기본용어]
+1. Spring bean: 스프링이 관리하는 인스턴스(객체)
+2. Spring Container: 스프링이 관리하는 메모리 구역, 스프링 컨테이너 안에는 여러개의 bean이 존재한다.
+
+[Rest API 어노테이션]
+1. Rest API: HTTP 통신을 통해 리소스의 CRUD를 수행하는 아키텍처/구조
+2. 종류
+    @Controller:
+        1. Spring web MVC 중에서 Controller 역할의 클래스임을 표시
+        2. 스프링 컨테이너(메모리)에 빈 인스턴스(객체)를 등록할 수 있다. - 싱글톤 사용할 필요 없음
+        3. 모든 HTTP 요청이 매핑/연결 되는 클래스로 사용할 수 있다.
+    @RestController:
+        1. @Controller + @ResponseBody가 조합된 어노테이션
+        2. 주로 REST API 컨트롤에서 사용, 템플릿 반환 시에는 사용되지 않는다
+    @GetMapping
+    @PostMapping
+    @PutMapping
+    @DeleteMapping
+        1. HTTP GET method의 요청을 자바 메소드와 매핑/연결 하는 어노테이션
+        2. HTTP GET URL 정의할 수 있다. @GetMapping("URL정의")
+            - 자바 메소드를 웹 통신으로 부터 외부로 연결이 가능하다
+            - 주의: 프로젝트 내 동일한 URL 중복은 불가능하나, HTTP Method가 다를 경우는 가능하다
+    @ResponseBody
+        1. HTTP 응답을 객체(Body) 또는 값으로 반환해주는 어노테이션
+            - Content-Type: "application/json"
+        2. 만일 생략하면 view(템플릿=jsp/타임리프/jsx 등) 반환이 기본값으로 적용된다
+    @RequestMapping("URL"
+        1. 메소드 또는 클래스 위에 주입 가능
+        2. 주로 클래스 위에서 사용 시 클래스들의 공통 URL을 정의할 때 사용된다
+    @RequestParam
+        1. HTTP 요청할때 쿼리스트링 방식으로 매개변수를 자바의 매개변수로 매핑하는 어노테이션
+        2. "쿼리스트링" 방식의 매개변수를 매핑하는 어노테이션
+        3. 사용가능한 HTTP method: @GetMapping, @PostMapping, @PutMapping, @DeleteMapping
+    @PostMapping
+        1. HTTP 요청할때 header Body 방식으로 데이터를 자바의 매개변수로 매핑하는 어노테이션
+        2. "HTTP Header Body" 방식의 데이터를 매핑하는 어노테이션

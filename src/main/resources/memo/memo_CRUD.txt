@@ -20,3 +20,4 @@ PUT
 DELETE
 게시물 삭제
 @DeleteMapping
+

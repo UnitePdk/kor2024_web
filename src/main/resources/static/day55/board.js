@@ -29,10 +29,7 @@ const writeBoard = () => {
 const findAll = () => {
   console.log("findall load");
   fetch("/findall")
-    .then((response) => {
-      console.log(response);
-      response.json();
-    })
+    .then((response) => response.json())
     .then((data) => console.log(data))
     .catch((error) => console.log(error));
 };
