@@ -1,0 +1,13 @@
+1. Spring mvc2 3tier에 따른 패키지/클래스 구성
+2. 아래 5개 클래스를 구성하여 구축
+    AppStart, StudentController, StudentService, StudentDao, StudentDto
+3. 학생 필드: 학생번호, 학생이름, 국어점수, 수학점수, 영어점수
+4. Talend API 테스트 진행
+5. DB/테이블명은 임의로 생성
+6. 아래 기능 구축
+    - 점수 등록
+    - 전체 점수 출력
+    - 특정 학생 점수 수정
+    - 특정 학생 점수 삭제
+
+    조건: Controller->Service->Dao로 가야함

@@ -1,0 +1,42 @@
+----day57
+MVC 패턴
+
+Model: 데이터 처리
+View: 사용자에게 보여주는 화면
+Controller: 사용자의 요청을 처리하고 모델과 뷰 연결
+
+MVC1: Controller/View를 한 페이지에서 작성 JSP(HTML/JAVA)
+    2010년 전에 쓰던걸로 프론트와 백엔드가 합쳐서 한 파일에 작업하므로 분업이 어려움
+MVC2: Controller, View, Model 작업
+
+MVC3: Spring MVC2-Tier3: 더 세분화 해서 비즈니스 로직을 만듦
+    - View: resource 폴더 내 html/css/js, React, 템플릿(JSP, 타임리프)
+        - 스프링 서버에서의 View 파일들은 모두 resource 안에 존재
+            resource/static - html/css/js
+            resource/templates - 타임리프
+    - Controller: 사용자의 HTTP 요청과 응답 담당
+        - 스프링 서버에서의 Controller는 @RestController, @Controller 어노테이션 이용해 해당 클래스가 컨트롤러임을 표시해야함
+    - Service: Controller와 Model 사이로 자바의 비즈니스(기능의 실질적인 처리) 로직 담당
+        - 스프링 서버에서의 Service는 @Service 어노테이션 이용해 해당 클래스가 서비스임을 표시
+    - Model: Service로 부터 받은 데이터의 데이터베이스 로직 담당, JPA, MyBites
+        DAO: 데이터베이스 로직 담당
+            - 스프링 서버에서의 DAO하지 않고 JPA를 권장 - @Repository
+            - 250107 기준 DAO로 활용하면 - @Component
+        DTO: 서로다른 레이어들 간의 데이터 이동 객체 역할
+
+스프링 웹 환경에서 기존 MVC 패턴 패키지 구성
+프로젝트명
+    -src
+     -main
+      -java
+        -controller
+        -model
+            -dto
+            -repository
+            -entity
+        -service
+        -AppStart 클래스
+
+      -resources - 프론트엔드 코드 파일, 설정파일
+        -static
+        -templates
