@@ -55,7 +55,7 @@ public class TodoDao {
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, todoDto.getContent());
-            ps.setBoolean(2, todoDto.getStatus());
+            ps.setBoolean(2, todoDto.isStatus());
             ps.setInt(3, todoDto.getIndex());
             if (ps.executeUpdate() == 1) return true;
         } catch (SQLException e) {
