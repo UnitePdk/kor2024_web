@@ -1,0 +1,46 @@
+---- day58
+정적 파일: html, css js, img 등 순수 확장자의 언어만 사용 가능
+동적 파일: JSP, 타임리프, 머스태치, JSX 파일 (템플릿)
+    - 서로 조합된 언어들을 사용 가능
+        - JSP: html, java
+        - 타임리프: html + 타임리프(java기반)
+        - 머스태치, html + 머스테치 언어
+        - JSX(react): html + js 언어
+    - 하나의 언어가 아닌 2개 이상의 언어가 합쳐진 문법이므로 렌더링이 필요
+        - 브라우저는 정적 파일만 인식 가능
+
+[템플릿]
+정의: 동적파일로 이루어진 확장자. 특정 서버들이 컴파일하면서 순수한 html로 만들어낸다.
+종류: JSP, 타임리프, 머스태치, JSX(react) 등
+    - 스프링 회사에서 공식적으로 타임리프를 지원함
+
+[타임리프]
+- 정의: 템플릿 엔진. 주로 서버에서 동적으로 렌더링 결과를 정적파일로 변환
+    - 다른 템플릿과 다르게 .html 확장자 사용한다
+- 목적:
+    1. html이 지원하지 않는 기능 사용
+    2. 동적 웹페이지
+    3. 간결한 문법
+- 내 프로젝트에 타임리프 적용하는 방법
+    1. start.spring.io/
+    2. Thymeleaf 의존성 추가 - implement
+- 스프링에서 템플릿 사용
+    src/main/resources/templates 폴더 추가, .html 확장자로 템플릿 파일 만들기
+
+    static: 정적파일, templates: 동적파일
+
+- 실습
+    static/day58/index.html
+        - ip:포트번호/day58/index.html
+        - localhost:8080/day58/index.html
+    templates/day58/index.html
+        - 스프링에서 위 경로의 동적파일 요청 URL은 없음
+        - @Controller에서 만듦
+
+- 타임리프가 제공하는 html 기능
+    1. 레이아웃 문법 제공: html 코드에 다른 html 파일을 첨부할 수 있음
+    2. 레이아웃 문법 사용법
+        1. 다른 html 파일에서 불러올 마크업에 fragment 정의
+            <마크업 th:fragment="name"> </마크업>
+        2. fragment 호출하기
+            <마크업 th:replace=""> </마크업>
