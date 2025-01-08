@@ -1,5 +1,6 @@
 // 할일 작성
 const add = () => {
+  console.log("add loaded");
   const contentInput = document.querySelector(".contentInput");
   const content_ = contentInput.value;
   const todo = { content: content_ };
@@ -18,53 +19,55 @@ const add = () => {
   getAll();
 };
 
+// 목록 가져와서 출력
 const getAll = () => {
   console.log("getAll loaded");
-  const result = fetch("/getall")
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.log(error));
-  console.log(result);
   let html = "";
-  result.map((v, i) => {
-    html += `<div class="contentBox ${todo.status ? "success" : ""}">
-          <div class="content">${todo.content}</div>
-          <div class="contentButton">
-            <button onclick="update()" class="updateButton button">수정</button>
-            <button onclick="delete_(${
-              todo.index
-            })" class="deleteButton button">삭제</button>
-          </div>
-        </div>`;
-  });
+  fetch("/getall")
+    .then((response) => response.json())
+    .then((data) => {
+      data.map((v) => {
+        html += `<div class="contentBox ${v.status ? "success" : ""}">
+            <div class="content">${v.content}</div>
+            <div class="contentButton">
+              <button onclick="edit(${v.index}, ${
+          v.content
+        })" class="editButton button">완료</button>
+              <button onclick="delete_(${
+                v.index
+              })" class="deleteButton button">삭제</button>
+            </div>
+          </div>`;
+      });
+      const todoBottom = document.querySelector(".todoBottom");
+      todoBottom.innerHTML = html;
+    })
+    .catch((error) => console.log(error));
 };
 
-// const print = () => {
-//   const todoBottom = document.querySelector(".todoBottom");
-//   let html = "";
-//   for (let i = 0; i < todoList.length; i++) {
-//     const todo = todoList[i];
-//     html += `<div class="contentBox ${todo.status ? "success" : ""}">
-//           <div class="content">${todo.content}</div>
-//           <div class="contentButton">
-//             <button onclick="update()" class="updateButton button">수정</button>
-//             <button onclick="delete_(${
-//               todo.index
-//             })" class="deleteButton button">삭제</button>
-//           </div>
-//         </div>`;
-//   }
-//   todoBottom.innerHTML = html;
-// };
+//수정
+const edit = (index_, content_) => {
+  console.log("edit loaded");
+  const todo = {
+    index: index_,
+    content: content_,
+    status: true,
+  };
 
-// const update = () => {};
+  const option = {
+    method: "PUT",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(todo),
+  };
 
-// const delete_ = (index) => {
-//   for (let i = 0; i < todoList.length; i++) {
-//     if (todoList[index].index == index) {
-//       todoList.splice(index, 1);
-//       break;
-//     }
-//   }
-//   print();
-// };
+  fetch("/edit", option).then(() => getAll());
+};
+
+// 삭제
+const delete_ = (index) => {
+  console.log("delete loaded");
+  fetch(`/delete?id=${index}`, { method: "DELETE" }).then(() => getAll());
+};
+
+// 최초 목록 출력
+getAll();
