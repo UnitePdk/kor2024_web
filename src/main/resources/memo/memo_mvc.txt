@@ -16,6 +16,7 @@ MVC3: Spring MVC2-Tier3: 더 세분화 해서 비즈니스 로직을 만듦
             resource/templates - 타임리프
     - Controller: 사용자의 HTTP 요청과 응답 담당
         - 스프링 서버에서의 Controller는 @RestController, @Controller 어노테이션 이용해 해당 클래스가 컨트롤러임을 표시해야함
+    - ViewController: HTTP 요청에 따른 템플릿을 반환하는 컨트롤러 클래스
     - Service: Controller와 Model 사이로 자바의 비즈니스(기능의 실질적인 처리) 로직 담당
         - 스프링 서버에서의 Service는 @Service 어노테이션 이용해 해당 클래스가 서비스임을 표시
     - Model: Service로 부터 받은 데이터의 데이터베이스 로직 담당, JPA, MyBites

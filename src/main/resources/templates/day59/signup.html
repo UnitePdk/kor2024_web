@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/day59/member.js" defer></script>
+  </head>
+  <body>
+    <div th:replace="~{/day59/header.html::header}"></div>
+    <div>
+      <div>아이디: <input type="text" id="signup_id" /></div>
+      <div>비밀번호: <input type="text" id="signup_password" /></div>
+      <div>닉네임: <input type="text" id="signup_name" /></div>
+      <div>연락처: <input type="text" id="signup_phone" /></div>
+      <button onclick="signup()">회원가입</button>
+    </div>
+  </body>
+</html>

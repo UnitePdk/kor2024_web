@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/day59/member.js" defer></script>
+  </head>
+  <body>
+    <div th:replace="~{/day59/header.html::header}"></div>
+    <div>
+      <div>아이디: <input type="text" id="login_id" /></div>
+      <div>비밀번호: <input type="text" id="login_password" /></div>
+      <button onclick="login()">로그인</button>
+    </div>
+  </body>
+</html>

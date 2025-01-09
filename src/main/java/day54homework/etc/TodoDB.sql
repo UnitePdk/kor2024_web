@@ -6,3 +6,5 @@
  todo_content longtext,
  todo_status boolean default false
  );
+ 
+ select * from todolist;
