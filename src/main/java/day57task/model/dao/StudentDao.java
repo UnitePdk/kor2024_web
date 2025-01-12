@@ -60,15 +60,34 @@ public class StudentDao {
         return list;
     } // func end
 
-//    // 특정 학생 점수 수정
-//    public boolean edit(StudentDto studentDto) {
-//        students.set(studentDto.getIndex(), studentDto);
-//        return true;
-//    }
-//
-//    // 특정 학생 점수 삭제
-//    public boolean delete(int index) {
-//        students.remove(index);
-//        return true;
-//    }
+    // 특정 학생 점수 수정
+    public boolean edit(StudentDto studentDto) {
+        String sql="update student set student_kor=?, student_math=?, student_eng=? where student_name=?";
+        try{
+            PreparedStatement ps=conn.prepareStatement(sql);
+            ps.setInt(1, studentDto.getKor());
+            ps.setInt(2, studentDto.getMath());
+            ps.setInt(3, studentDto.getEng());
+            ps.setString(4, studentDto.getName());
+            int result=ps.executeUpdate();
+            if (result==1) return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    // 특정 학생 정보 삭제
+    public boolean delete(int index) {
+        String sql="delete from student where student_index=?";
+        try{
+            PreparedStatement ps=conn.prepareStatement(sql);
+            ps.setInt(1, index);
+            int result=ps.executeUpdate();
+            if (result==1) return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
 }

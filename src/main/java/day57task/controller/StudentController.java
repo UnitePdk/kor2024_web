@@ -1,13 +1,34 @@
 package day57task.controller;
 
-import day57task.model.dao.StudentDao;
+import day57task.model.dto.StudentDto;
+import day57task.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
-// 스프링이 알아서 관리할 인스턴스(Bean)을 생성해줌
-// 이 클래스의 싱글톤 인스턴스의 제어권이 Spring에게 넘어가서 알아서 관리해줌.
 public class StudentController {
-    // Spring이 만든 Bean(객체/싱글톤 인스턴스)를 요청
-    @Autowired private StudentDao studentDao;
+    @Autowired
+    private StudentService studentService;
+
+    @PostMapping("/register.do")
+    public boolean register(@RequestBody StudentDto studentDto) {
+        return studentService.register(studentDto);
+    }
+
+    @GetMapping("/list.do")
+    public ArrayList<StudentDto> list() {
+        return studentService.list();
+    }
+
+    @PutMapping("/edit.do")
+    public boolean edit(@RequestBody StudentDto studentDto) {
+        return studentService.edit(studentDto);
+    }
+
+    @DeleteMapping("/delete.do")
+    public boolean delete(@RequestParam int index) {
+        return studentService.delete(index);
+    }
 }

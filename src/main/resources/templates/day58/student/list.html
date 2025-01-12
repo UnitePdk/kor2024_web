@@ -3,35 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>학생 점수 관리 시스템</title>
+    <script src="/day58/student.js"></script>
+    <script>
+      list();
+    </script>
   </head>
   <body>
     <div th:replace="~{/day58/student/header.html::header}"></div>
     <div>
       <h3>학생 명단</h3>
-      <table border="1">
-        <tr>
-          <th>번호</th>
-          <th>이름</th>
-          <th>국어점수</th>
-          <th>수학점수</th>
-          <th>영어점수</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>유재석</td>
-          <td>100</td>
-          <td>92</td>
-          <td>96</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>강호동</td>
-          <td>87</td>
-          <td>68</td>
-          <td>92</td>
-        </tr>
-      </table>
+      <table border="1" id="student_table"></table>
     </div>
     <div th:replace="~{/day58/student/footer.html::footer}"></div>
   </body>

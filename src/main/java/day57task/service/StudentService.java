@@ -18,9 +18,17 @@ public class StudentService {
     }
 
     // 전체 점수 리스트 반환
-//    public ArrayList<StudentDto> list() {
-//        return studentDao.list();
-//    }
+    public ArrayList<StudentDto> list() {
+        return studentDao.list();
+    }
 
-    //
+    // 특정 학생 점수 수정
+    public boolean edit(StudentDto studentDto) {
+        return studentDao.edit(studentDto);
+    }
+
+    // 특정 학생 정보 삭제
+    public boolean delete(int index) {
+        return studentDao.delete(index);
+    }
 }
