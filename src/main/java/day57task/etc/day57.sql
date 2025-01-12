@@ -9,4 +9,4 @@ student_eng int
 );
 
 select * from student;
-drop table student;
+# drop table student;
