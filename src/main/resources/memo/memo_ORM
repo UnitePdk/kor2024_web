@@ -1,0 +1,51 @@
+[DB]
+데이터베이스
+    1. noSQL 데이터베이스: SQL 대신 객체지향 데이터 관리
+    2. 관계형 데이터베이스: SQL 사용하는 테이블 간 관계형 데이터베이스 관리
+    낡은 트렌드는 관계형임
+
+[ORM] - Object Relational Mapping - 객체와 테이블 간의 매핑을 처리하는 기술
+1. 정의: 객체지향 프로그래밍에서 사용하는 객체와 관계형 데이터베이스에서 사용하는 테이블과 매핑해주는 기술.
+    - 자바 객체와 관계형 데이터베이스 테이블 간 매핑을 자동으로 처리해주는 기술
+2. 목적: 개발자에게 편리성 제공
+
+[Hibernate] - ORM 기술의 구현체, 프레임워크
+1. 정의: 자바에서 ORM을 구현한 프레임워크, 자바 객체를 관계형 데이터베이스에 쉽게 저장/조회할 수 있도록 도와주는 라이브러리
+2. 목적:
+    1. SQL 쿼리를 자동으로 생성해주기 때문에 편리하고, 개발자 직접 SQL 작성하지 않아도 된다.
+        - 간단한 쿼리는 자동이지만, 복잡한 쿼리는 결국 직접 작성해야한다.
+    2. 자동으로 타입 변환해주는 기능 제공
+    3. JDBC(DAO)의 복잡함을 해결하고 간결한 코드를 이용하여 제공받은 라이브러리 빠른 개발
+3. Spring 프레임워크에서 공식적으로 지원
+
+[JPA] - Java Persistence Api - ORM 기술의 구현체를 조작하는 인터페이스
+1. 정의: 자바에서 ORM을 사용할 때 표준 API, JPA는 자바에서 객체 관계 매핑을 어떻게 처리할지 정의한 규칙
+    - Hibernate는 구현체, JPA는 인터페이스: JPA를 이용하여 Hibernate를 사용한다
+2. 목적:
+    1. JPA를 이용하여 SQL 생성, 트랜잭션 관리, 엔티티 정의 등 관리할 수 있다.
+
+~day60 - DAO -> JDBC -> DBServer
+day61~ - JPA -> Hibernate(ORM) -> DBServer
+
+[JPA 사용]
+1. 그레이들 [implementation 'org.springframework.boot:spring-boot-starter-data-jpa'] 추가
+    JPA 기본 설정하지 않으면 Spring Web 실행 불가능
+    mysql 그레이들 추가 필수
+2. JPA가 매핑할 DB 정보를 설정
+    resources/application.properties 추가
+        mysql: com.mysql.cj.jdbc.Driver
+
+[엔티티] - 개체/본체
+1. 정의: 데이터베이스 테이블과 1:1로 매핑되는 클래스
+    테이블 -> 클래스 - 클래스 1개당 테이블 1개
+    레코드 -> 엔티티 - 인스턴스 1개당 레코드 1개
+
+2. 엔티티 클래스 정의하는법
+    @Entity: 클래스 위에 어노테이션 작성
+        * 관례적으로 테이블 1개당 pk 필드는 1개 이상 한다
+        * pk 설정하지 않으면 오류 발생
+    @Id: 해당 필드를 primary key로 정의
+    @Column: 해당 필드를 테이블 열(column)로 정의
+
+3. 엔티티를 조작할 인터페이스 정의하는법
+    @Repository: 스프링 메모리에 객체를 생성하고 mvc패턴의 Repository 담당임을 표시
