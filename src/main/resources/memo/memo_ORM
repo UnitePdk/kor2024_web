@@ -46,6 +46,30 @@ day61~ - JPA -> Hibernate(ORM) -> DBServer
         * pk 설정하지 않으면 오류 발생
     @Id: 해당 필드를 primary key로 정의
     @Column: 해당 필드를 테이블 열(column)로 정의
+        자료형 타입을 자동으로 변환해줌
+        @Column( ColumnDefinition = "varchar(100)"
+        @Column( nullable = true )
+    @Table: 테이블 설정 매핑을 정의
+        @Table(name = "테이블명")
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
+        @auto_increment
 
 3. 엔티티를 조작할 인터페이스 정의하는법
     @Repository: 스프링 메모리에 객체를 생성하고 mvc패턴의 Repository 담당임을 표시
+    extends JpaRepository< 엔티티 클래스명, PK의 자바 타입명 >
+
+4. JPA 기본 제공 함수
+    .save( 엔티티 ): 해당하는 엔티티를 매핑된 테이블에 레코드를 등록
+    .findAll(): 매핑된 테이블의 모든 레코드를 반환
+    .findById(pk 변수): 매핑된 테이블의 지정한 pk 번호에 해당하는 레코드를 반환
+        Optional 타입으로 반환되므로 .get() 함수를 이용하여 값을 반환
+
+    * 수정함수는 존재하지 않는다. (영속성) 엔티티가 수정되면 DB의 레코드도 같이 수정
+        영속성 처리할 함수 위에 @Transactional
+        관례적으로 서비스 함수들은 JPA를 이용하여 DB를 조작할 경우 무조건 @Transactional 주입
+            원자성: 처리 단위가 모두 성공하거나 모두 실패하게만 만듦
+            일관성: 처리 이후 데이터가 유효한 상태를 유지
+            격리성: 다른 트랜잭션과 서로 영향을 주지 않음
+            지속성: 작업이 완료되면 데이터는 영구적으로 저장
+
+    .deleteById(pk 변수): 매핑된 테이블의 지정한 pk 번호에 해당하는 레코드를 삭제
