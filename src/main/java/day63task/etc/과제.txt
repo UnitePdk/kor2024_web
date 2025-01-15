@@ -1,0 +1,17 @@
+웹 과제 7: JPA
+
+주제: TodoList RESTful API 구축 - JPA 활용
+
+조건:
+1. TodoList의 Controller, Service, Repository, Entity, Dto, AppStart 구성하여 구현
+2. entity와 dto 변환 함수 필수
+3. baseTime 활용
+
+구현:
+1. 할일 등록
+2. 할일 전체 조회
+3. 할일 상태 수정
+4. 할일 삭제
+* 할일 속성: 식별번호, 할일 내용, 할일 상태 3가지 필수
+
+day55 참고 프론트는 선택

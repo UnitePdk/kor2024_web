@@ -73,3 +73,25 @@ day61~ - JPA -> Hibernate(ORM) -> DBServer
             지속성: 작업이 완료되면 데이터는 영구적으로 저장
 
     .deleteById(pk 변수): 매핑된 테이블의 지정한 pk 번호에 해당하는 레코드를 삭제
+
+[BaseTime] - 엔티티의 생성 날짜와 수정 날짜를 자동으로 주입
+    1. [엔티티 생성,수정 날짜/시간 필드/속성]을 하나의 BaseTime 클래스에 선언
+    2. 사용할 엔티티에게 BaseTime 클래스 상속
+    3. 주요 어노테이션
+        @CreatedDate: 엔티티의 생성 날짜를 자동 기록
+        @LastModifiedDate: 엔티티의 마지막 수정 날짜를 자동 기록
+        @MappedSuperclass: 현재 클래스는 데이터베이스와 매핑하지 않고 상속받은 엔티티에 속성을 매핑함
+            - 해당 클래스는 매핑하지 않고 상속받은 클래스가 대신 매핑해줌
+        @EntityListeners(AuditingEntityListener.class)
+            - 엔티티가 생성/수정될 때 자동으로 @CreatedDate/@LastModifiedDate 속성값을 설정
+            - JPA Auditing 기능 활성화
+                JPA가 실시간으로 엔티티의 변화를 감지
+                AppStart 클래스 위에 JPA Auditing 기능 ON
+                @EnableJpaAuditing
+
+[타입 변환] - entity는 spring mvc 패턴의 controller에서 사용을 비권장
+    DTO -> entity 변환
+        controller에서 DTO를 받아 service에서는 DTO를 entity로 변환해야한다.
+    entity -> DTO 변환
+        service에서 조작한 entity를 controller에게 보내기 위해 변환해야한다.
+            - controller에게 entity를 주면 안됨
