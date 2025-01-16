@@ -30,9 +30,8 @@ const getAll = () => {
         html += `<div class="contentBox ${v.status ? "success" : ""}">
             <div class="content">${v.content}</div>
             <div class="contentButton">
-              <button onclick="edit(${v.index}, ${
-          v.content
-        })" class="editButton button">완료</button>
+              <button onclick="edit(${v.index}
+        )" class="editButton button">완료</button>
               <button onclick="delete_(${
                 v.index
               })" class="deleteButton button">삭제</button>
@@ -46,27 +45,21 @@ const getAll = () => {
 };
 
 //수정
-const edit = (index_, content_) => {
+const edit = (index) => {
   console.log("edit loaded");
-  const todo = {
-    index: index_,
-    content: content_,
-    status: true,
-  };
 
   const option = {
     method: "PUT",
     headers: { "Content-type": "application/json" },
-    body: JSON.stringify(todo),
   };
 
-  fetch("/edit", option).then(() => getAll());
+  fetch(`/edit?index=${index}`, option).then(() => getAll());
 };
 
 // 삭제
 const delete_ = (index) => {
   console.log("delete loaded");
-  fetch(`/delete?id=${index}`, { method: "DELETE" }).then(() => getAll());
+  fetch(`/delete?index=${index}`, { method: "DELETE" }).then(() => getAll());
 };
 
 // 최초 목록 출력

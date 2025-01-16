@@ -23,13 +23,13 @@ public class TodoController {
         return todoService.getAll();
     }
 
-//    @PutMapping("/edit")
-//    public boolean edit(@RequestBody TodoDto todoDto) {
-//        return todoService.edit(todoDto);
-//    }
-//
-//    @DeleteMapping("/delete")
-//    public boolean delete(@RequestParam int index) {
-//        return todoService.delete(index);
-//    }
+    @PutMapping("/edit")
+    public boolean edit(@RequestParam int index) {
+        return todoService.edit(index);
+    }
+
+    @DeleteMapping("/delete")
+    public boolean delete(@RequestParam int index) {
+        return todoService.delete(index);
+    }
 }
