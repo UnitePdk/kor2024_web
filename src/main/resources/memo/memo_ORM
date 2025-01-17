@@ -95,3 +95,8 @@ day61~ - JPA -> Hibernate(ORM) -> DBServer
     entity -> DTO 변환
         service에서 조작한 entity를 controller에게 보내기 위해 변환해야한다.
             - controller에게 entity를 주면 안됨
+
+[초기화 데이터 작성]
+1. resources/data.sql 작성
+    안에 insert into ~~ 초기 데이터 작성
+2. application.properties 설정 추가
